@@ -3,26 +3,25 @@ package org.project.entity.enemies;
 import org.project.entity.Entity;
 import org.project.object.weapons.Weapon;
 
-// TODO: UPDATE IMPLEMENTATION
-public class Skeleton extends Enemy{
+public class Dragon extends Enemy{
+    int maxHP = 600;
+    int damage = 150;
 
-    int maxHP = 100;
-    int damage = 20;
-    //skeletons don't have mana, they just attack in a simple way
-
-    public Skeleton(int hp, int mp, Weapon weapon, String name, int damagepower) {
+    public Dragon(int hp, int mp, Weapon weapon, String name, int damagepower) {
         super(hp, mp, weapon, name, damagepower);
     }
 
     @Override
     public void attack(Entity target)
     {
-        target.takeDamage(damagepower);
+        super.setDamagepower(damage);
+        target.takeDamage(super.getDamagepower());
     }
 
     @Override
-    public void defend() {
-        if(super.getHp() <= (maxHP/2))
+    public void defend()
+    {
+        if(super.getHp()/5 <= maxHP)
         {
             defending = true;
             System.out.println("enemy is on defending mode");
@@ -38,11 +37,12 @@ public class Skeleton extends Enemy{
     @Override
     public void fillMana(int mana)
     {
-        //this is useless
+        //no mana
     }
 
     @Override
-    public int getMaxHP() {
+    public int getMaxHP()
+    {
         super.setHp(maxHP);
         return maxHP;
     }
@@ -52,8 +52,4 @@ public class Skeleton extends Enemy{
         super.setHp(maxHP);
         return maxHP;
     }
-
-
-
-    // TODO: DESIGN ENEMY'S WEAPON AND ARMOR AND IMPLEMENT THE CONSTRUCTOR
 }
