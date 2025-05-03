@@ -6,13 +6,13 @@ import java.util.ArrayList;
 
 public class Location {
     private String name;
+    private boolean visited = false;
 
-    private ArrayList<Location> locations;
-    private ArrayList<Enemy> enemies;
+    private ArrayList<Enemy> LocationEnemies = new ArrayList<Enemy>();
 
-    public Location(ArrayList<Location> locations, ArrayList<Enemy> enemies) {
-        this.locations = locations;
-        this.enemies = enemies;
+    public Location(ArrayList<Enemy> enemies, String name) {
+        this.LocationEnemies.addAll(enemies);
+        this.name = name;
     }
 
     /*
@@ -23,11 +23,15 @@ public class Location {
         return name;
     }
 
-    public ArrayList<Location> getLocations() {
-        return locations;
+    public ArrayList<Enemy> getEnemies() {
+        return LocationEnemies;
     }
 
-    public ArrayList<Enemy> getEnemies() {
-        return enemies;
+    public boolean getVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
     }
 }

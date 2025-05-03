@@ -5,7 +5,7 @@ import org.project.object.armors.Armor;
 import org.project.object.weapons.Weapon;
 
 // TODO: UPDATE IMPLEMENTATION
-public abstract class Player {
+public abstract class Player implements Entity{
     protected String name;
     Weapon weapon;
     Armor armor;
@@ -13,11 +13,14 @@ public abstract class Player {
     private int maxHP;
     private int mp;
     private int maxMP;
+    protected boolean defends = false;
 
     public Player(String name, int hp, int mp, Weapon weapon, Armor armor) {
         this.name = name;
         this.hp = hp;
+        this.maxHP = hp;
         this.mp = mp;
+        this.maxMP= mp;
 
         this.weapon = weapon;
         this.armor = armor;
@@ -29,14 +32,29 @@ public abstract class Player {
     }
 
     @Override
-    public void defend() {
+    public void defend()
+    {
+        if(getHp() <= getMaxHP()/2)
+        {
+            defends = true;
+            System.out.println("Hero is on defending mode");
+        }
         // TODO: (BONUS) IMPLEMENT A DEFENSE METHOD FOR SHIELDS
     }
 
     // TODO: (BONUS) UPDATE THE FORMULA OF TAKING DAMAGE
     @Override
-    public void takeDamage(int damage) {
-        hp -= damage - armor.getDefense();
+    public void takeDamage(int damage)
+    {
+        if(defends)
+        {
+            hp -= damage - armor.getDefense();
+            armor.setDurability(armor.getDurability() - 20);
+        }
+        else
+        {
+            hp -= damage;
+        }
     }
 
     @Override
@@ -58,6 +76,11 @@ public abstract class Player {
 
     public String getName() {
         return name;
+    }
+
+    public void visibilityMp()
+    {
+        this.mp -= 20;
     }
 
     public int getHp() {
@@ -84,6 +107,38 @@ public abstract class Player {
 
     public Armor getArmor() {
         return armor;
+    }
+
+    public boolean getDefends(){
+        return defends;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public void setMaxHP(int maxHP) {
+        this.maxHP = maxHP;
+    }
+
+    public void setMp(int mp) {
+        this.mp = mp;
+    }
+
+    public void setMaxMP(int maxMP) {
+        this.maxMP = maxMP;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    public void setArmor(Armor armor) {
+        this.armor = armor;
     }
 
 }

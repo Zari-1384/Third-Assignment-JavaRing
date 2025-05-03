@@ -5,21 +5,22 @@ import org.project.entity.enemies.Enemy;
 import org.project.object.armors.Armor;
 import org.project.object.weapons.Weapon;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-// TODO: UPDATE IMPLEMENTATION
-public class Knight extends Player{
+public class Wizard extends Player{
 
-    public Knight(String name, int hp, int mp, Weapon weapon, Armor armor) {
+    //wisard have a simle armor
+
+    public Wizard(String name, int hp, int mp, Weapon weapon, Armor armor) {
         super(name, hp, mp, weapon, armor);
     }
 
-    public void heavy_attack(ArrayList<Enemy> targets)
+    public void spell_attak(ArrayList<Enemy> targets)
     {
-        if(super.getMp() >= 10)
+        if(super.getMp() >= 30)
         {
-            weapon.uniqueAbility(targets);
+            weapon.powerfull_spell(targets);
+            super.setMp(super.getMp() - 30);
         }
         else
         {
@@ -28,3 +29,5 @@ public class Knight extends Player{
     }
 
 }
+
+
